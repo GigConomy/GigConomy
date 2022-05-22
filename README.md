@@ -14,207 +14,41 @@
 
 ## List of Bounties implemented:
 
-**⭓ Polygon:** We have used Polygon Mumbai Testnet for deploying smart contracts of
-**1) Escrow Agreement**
+**⭓ Polygon:**
 
-## Polygon Implementation:
-
-```
-module.exports = {`
-  networks: {
-    hardhat: {},
-    mumbai: {
-      url: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
-      accounts: [process.env.REACT_APP_PRIVATE_KEY],
-    },
-  },
-
-  solidity: {
-    version: "0.8.0",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 200,
-      },
-    },
-  },
-};
-```
-
-https://github.com/GigConomy/GigConomy/blob/master/hardhat.config.js
+https://github.com/GigConomy/GigConomy/blob/master/polygon.md
 
 **⚫ Spheron:** We have used Spheron Decentralized cloud to host our Dapp using Pinta storage integration of Spheron.
 
 [dapp url]: ().
 
-**WalletConnect:** Using WalletConnect to enables a mobile wallet to easily connect to decentralized web applications, and interact with them from your phone.
+**WalletConnect:**
 
-## WalletConnect Implementation:
+https://github.com/GigConomy/GigConomy/blob/master/walletconnect.md
 
-```
-walletconnect: {
-    package: WalletConnectProvider, // required
-    options: {
-      infuraId: process.env.REACT_APP_INFURA_KEY, // required
-    },
-  },
-```
+**Unstoppable Login:**
 
-https://github.com/GigConomy/GigConomy/blob/master/src/providerOptions.js
+https://github.com/GigConomy/GigConomy/blob/master/unstoppable.md
 
-**Unstoppable Login:** Using Unstoppable domains user can login with their unstoppable domains.
+**Coinbase Wallet:**
 
-## Unstoppable Domains Implementation:
+https://github.com/GigConomy/GigConomy/blob/master/coinbase.md
 
-```
-export const uauthOptions = {
-  clientID: "79a8a15a-dddc-4d39-8483-9db5536cc839",
-  redirectUri: "http://localhost:3000",
+**Ethereum Push Notification Service (EPNS):**
 
-  scope: "openid wallet",
-};
+https://github.com/GigConomy/GigConomy/blob/master/epns.md
 
-"custom-uauth": {
-    display: UAuthWeb3Modal.display,
-    connector: UAuthWeb3Modal.connector,
-    package: UAuthSPA,
-    options: uauthOptions,
-  },
+**Worldcoin:**
 
-```
+https://github.com/GigConomy/GigConomy/blob/master/worldcoin.md
 
-https://github.com/GigConomy/GigConomy/blob/master/src/providerOptions.js
+**Transak:**
 
-**Coinbase Wallet:** Coinbase Wallet allow us to connect and send, receive crypto payment.
+https://github.com/GigConomy/GigConomy/blob/master/transak.md
 
-## Coinbase Wallet Implementation:
+**Covalent:**
 
-```
- walletlink: {
-    package: CoinbaseWalletSDK, // Required
-    options: {
-      appName: "GigConomy", // Required
-      infuraId: process.env.REACT_APP_INFURA_KEY, // Required unless you provide a JSON RPC url; see `rpc` below
-    },
-  },
-
-```
-
-https://github.com/GigConomy/GigConomy/blob/master/src/providerOptions.js
-
-**Ethereum Push Notification Service (EPNS):** Using EPNS any smart contract, dApp or backend can send on-chain or off-chain notifications which is connected to wallet addresses of a user.
-
-## EPNS Implementation:
-
-```
- async function fetchNotifications(account) {
-    if (account) {
-      // define the variables required to make a request
-      const walletAddress = account;
-      const pageNumber = 1;
-      const itemsPerPage = 20;
-
-      // fetch the notifications
-      const { count, results } = await api.fetchNotifications(
-        walletAddress,
-        itemsPerPage,
-        pageNumber
-      );
-
-      // parse all the fetched notifications
-      const parsedResponse = utils.parseApiResponse(results);
-      setNotificationItems(parsedResponse);
-    }
-  }
-
-  async function sendNotifications(data) {
-    try {
-      const tx = await epnsSdk.sendNotification(
-        data.to,
-        "GigConomy",
-        data.message,
-        "",
-        "",
-        3, //this is the notificationType
-        "http://localhost:3000/", // a url for users to be redirected to
-        "https://media.istockphoto.com/vectors/abstract-blurred-colorful-background-vector-id1248542684?k=20&m=1248542684&s=612x612&w=0&h=1yKiRrtPhiqUJXS_yJDwMGVHVkYRk2pJX4PG3TT4ZYM=", // an image url, or an empty string
-        null //this can be left as null
-      );
-      setIsUpdated(!isUpdated);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-```
-
-https://github.com/GigConomy/GigConomy/blob/master/src/context/Notification.js
-
-**Worldcoin:** Using worldcoin to verify user.
-
-## Worldcoin Implementation:
-
-```
-  async function getVerified() {
-    try {
-      const result = await worldID.enable();
-      console.log("World ID verified succesfully:", result);
-    } catch (failure) {
-      console.warn("World ID verification failed:", failure);
-      // Re-activate here so your end user can try again
-    }
-  }
-```
-
-https://github.com/GigConomy/GigConomy/blob/master/src/LendingPage/LendingHeader.js
-
-**Transak:** Using Transak we can onboard more user by getting fiat currency and giving them crypto.
-
-## Transak Implementation:
-
-```
- let transak = new transakSDK({
-      apiKey: process.env.REACT_APP_TRANSAK_API_KEY, // Your API Key
-      environment: "STAGING", // STAGING/PRODUCTION
-      hostURL: window.location.origin,
-      widgetHeight: "480px",
-      widgetWidth: "500px",
-      // Examples of some of the customization parameters you can pass
-      defaultCryptoCurrency: "ETH", // Example 'ETH'
-      walletAddress: account, // Your customer's wallet address
-      themeColor: "#6b46c1", // App theme color
-      fiatCurrency: "USD", // If you want to limit fiat selection eg 'USD'
-      email: "", // Your customer's email address
-      redirectURL: "",
-    });
-    setTransak(transak);
-    transak.init();
-
-    // To get all the events
-    transak.on(transak.ALL_EVENTS, (data) => {
-      console.log(data);
-    });
-    transak.on(transak.EVENTS.TRANSAK_ORDER_SUCCESSFUL, (orderData) => {
-      console.log(orderData);
-      transak.close();
-    });
-
-```
-
-https://github.com/GigConomy/GigConomy/blob/master/src/context/Transak.js
-
-**Covalent:** Covalent is used to get data of contract from blockchain
-
-## Covalent Implementation:
-
-```
-const data = await Moralis.Plugins.covalent.getLogEventsByContractAddress({
-        chainId: 80001,
-        contractAddress: AgreementAddress,
-      });
-```
-
-https://github.com/GigConomy/GigConomy/blob/master/src/sections/%40dashboard/app/AppTotalAgreement.js
+https://github.com/GigConomy/GigConomy/blob/master/covalent.md
 
 **Challenges we have faced:** When we started building, we had so many ideas for features and functionalities to implement in GigConomy. We had too many ideas like we can build a freelancing platform, we can build a review system for businesses and so on. As a startup we knew that too many features or trying to cover too many use cases at once will confuse the users and implemented minimum possible features to solve one use case.
 
