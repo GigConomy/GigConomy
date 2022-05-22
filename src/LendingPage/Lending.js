@@ -92,7 +92,7 @@ export default function Lending() {
             </p>
             <div width="100%"
               height="500px"><iframe
-                style={{ width: '100%', height: "500px" }} src="https://www.loom.com/embed/5029cef54e9e4603b7f80ea4a20ec468" ></iframe></div>
+                style={{ width: '100%', height: "500px" }} src="https://www.loom.com/share/dba9c5dace8d4dd5ae68e1e99f9b28c4" ></iframe></div>
           </div>
         </div>
       </div>
