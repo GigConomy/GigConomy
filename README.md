@@ -47,42 +47,6 @@ https://github.com/GigConomy/GigConomy/blob/master/hardhat.config.js
 
 [dapp url]: ().
 
-**💾 IPFS/Filecoin NFT.Storage:** We are Using Web3.Storage, to permanently store all the details of user invoices and subscription service on decentralized storage.
-
-## IPFS/Filecoin Implementation:
-
-```
-  function getAccessToken() {
-    // If you're just testing, you can paste in a token
-    // and uncomment the following line:
-    // return 'paste-your-token-here'
-
-    // In a real app, it's better to read an access token from an
-    // environement variable or other configuration that's kept outside of
-    // your code base. For this to work, you need to set the
-
-    // WEB3STORAGE_TOKEN environment variable before you run your code.
-    return process.env.REACT_APP_WEB3_STORAGE_API_KEY;
-  }
-
-  function makeFileObjects(data) {
-    // You can create File objects from a Blob of binary data
-    // see: https://developer.mozilla.org/en-US/docs/Web/API/Blob
-    // Here we're just storing a JSON object, but you can store images,
-    // audio, or whatever you want!
-
-    const blob = new Blob([JSON.stringify(data)], {
-      type: "application/json",
-    });
-
-    const files = [new File([blob], "subscribtion_Details.json")];
-    return files;
-  }
-```
-
-https://github.com/GigConomy/GigConomy/blob/master/src/modal/CreateSubscribtionModal.js
-https://github.com/GigConomy/GigConomy/blob/master/src/modal/CreateInvoiceModal.js
-
 **WalletConnect:** Using WalletConnect to enables a mobile wallet to easily connect to decentralized web applications, and interact with them from your phone.
 
 ## WalletConnect Implementation:
