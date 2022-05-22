@@ -243,6 +243,19 @@ https://github.com/GigConomy/GigConomy/blob/master/src/LendingPage/LendingHeader
 
 https://github.com/GigConomy/GigConomy/blob/master/src/context/Transak.js
 
+**Covalent:** Covalent is used to get data of contract from blockchain
+
+## Covalent Implementation:
+
+```
+const data = await Moralis.Plugins.covalent.getLogEventsByContractAddress({
+        chainId: 80001,
+        contractAddress: AgreementAddress,
+      });
+```
+
+https://github.com/GigConomy/GigConomy/blob/master/src/sections/%40dashboard/app/AppTotalAgreement.js
+
 **Challenges we have faced:** When we started building, we had so many ideas for features and functionalities to implement in GigConomy. We had too many ideas like we can build a freelancing platform, we can build a review system for businesses and so on. As a startup we knew that too many features or trying to cover too many use cases at once will confuse the users and implemented minimum possible features to solve one use case.
 
 ## Homepage:
