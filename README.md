@@ -21,7 +21,29 @@ get rewarded for best Trust Score.**
 **⭓ Polygon:** We have used Polygon Mumbai Testnet for deploying smart contracts of
 **1) Escrow Agreement**
 
+## Polygon Implementation:
+ 
+```
+module.exports = {`
+  networks: {
+    hardhat: {},
+    mumbai: {
+      url: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
+      accounts: [process.env.REACT_APP_PRIVATE_KEY],
+    },
+  },
 
+  solidity: {
+    version: "0.8.0",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
+    },
+  },
+};
+```
 
 https://github.com/GigConomy/GigConomy/blob/master/hardhat.config.js
 
@@ -33,63 +55,228 @@ https://github.com/GigConomy/GigConomy/blob/master/hardhat.config.js
 
 ## IPFS/Filecoin Implementation:
 
-https://github.com/jaydippatel83/trustified-Dapp/blob/master/src/modal/HyphenBridgeModal.js
-https://github.com/jaydippatel83/trustified-Dapp/blob/master/src/modal/CreateSubscribtionModal.js
-https://github.com/jaydippatel83/trustified-Dapp/blob/master/src/modal/CreateInvoiceModal.js
+```
+  function getAccessToken() {
+    // If you're just testing, you can paste in a token
+    // and uncomment the following line:
+    // return 'paste-your-token-here'
 
-**Biconomy:** Using Biconomy, we have implemented 1) **Hyphen Bridge** for fast and secure transfer of assets from Polygon to Ethereum and vice versa 2) **Enabled Gasless transactions** for Escrow Agreement functionality. When buyers or sellers stake their crypto assets in Escrow agreement, our Dapp will pay gas behalf of users through Biconomy Gas Tank to provide seamless experience to users.
+    // In a real app, it's better to read an access token from an
+    // environement variable or other configuration that's kept outside of
+    // your code base. For this to work, you need to set the
 
-## Biconomy Implementation:
+    // WEB3STORAGE_TOKEN environment variable before you run your code.
+    return process.env.REACT_APP_WEB3_STORAGE_API_KEY;
+  }
 
-https://github.com/jaydippatel83/trustified-Dapp/blob/master/src/context/HyphenBridgeContext.js
+  function makeFileObjects(data) {
+    // You can create File objects from a Blob of binary data
+    // see: https://developer.mozilla.org/en-US/docs/Web/API/Blob
+    // Here we're just storing a JSON object, but you can store images,
+    // audio, or whatever you want!
 
-**Superfluid:** Using Superfluid to help individual/business owners get subscription fees for their products and services for particular periods such as 1 Month, 3 Months or 6 Months and streasend funds using superfluid money streaming service.
+    const blob = new Blob([JSON.stringify(data)], {
+      type: "application/json",
+    });
 
-## Superfluid Implementation:
+    const files = [new File([blob], "subscribtion_Details.json")];
+    return files;
+  }
+  ```
 
-https://github.com/jaydippatel83/trustified-Dapp/blob/master/src/context/SuperfluidContext.js
-https://github.com/jaydippatel83/trustified-Dapp/blob/master/src/sections/%40dashboard/app/AppBugReports.js
+https://github.com/GigConomy/GigConomy/blob/master/src/modal/CreateSubscribtionModal.js
+https://github.com/GigConomy/GigConomy/blob/master/src/modal/CreateInvoiceModal.js
 
-**The Graph:** We have used superfluid subgraph to fetch cashflow data of user’s product subscription to analyze revenue using total incoming stream of active subscription.
+**WalletConnect:** Using WalletConnect to enables a mobile wallet to easily connect to decentralized web applications, and interact with them from your phone.
 
-## The Graph Implementation:
+## WalletConnect Implementation:
 
-https://github.com/jaydippatel83/trustified-Dapp/blob/master/src/context/SuperfluidContext.js
+```
+walletconnect: {
+    package: WalletConnectProvider, // required
+    options: {
+      infuraId: process.env.REACT_APP_INFURA_KEY, // required
+    },
+  },
+ ```
+ 
+ https://github.com/GigConomy/GigConomy/blob/master/src/providerOptions.js
+
+**Unstoppable Login:** Using Unstoppable domains user can login with their unstoppable domains.
+
+## Unstoppable Domains Implementation:
+
+```
+export const uauthOptions = {
+  clientID: "79a8a15a-dddc-4d39-8483-9db5536cc839",
+  redirectUri: "http://localhost:3000",
+
+  scope: "openid wallet",
+};
+
+"custom-uauth": {
+    display: UAuthWeb3Modal.display,
+    connector: UAuthWeb3Modal.connector,
+    package: UAuthSPA,
+    options: uauthOptions,
+  },
+  
+```
+
+https://github.com/GigConomy/GigConomy/blob/master/src/providerOptions.js
+
+
+**Coinbase Wallet:** Coinbase Wallet allow us to connect and send, receive crypto payment.
+
+##  Coinbase Wallet Implementation:
+
+```
+ walletlink: {
+    package: CoinbaseWalletSDK, // Required
+    options: {
+      appName: "GigConomy", // Required
+      infuraId: process.env.REACT_APP_INFURA_KEY, // Required unless you provide a JSON RPC url; see `rpc` below
+    },
+  },
+  
+```
+
+https://github.com/GigConomy/GigConomy/blob/master/src/providerOptions.js
+
+**Ethereum Push Notification Service (EPNS):** Using EPNS any smart contract, dApp or backend can send on-chain or off-chain notifications which is connected to wallet addresses of a user.
+
+## EPNS Implementation:
+
+```
+ async function fetchNotifications(account) {
+    if (account) {
+      // define the variables required to make a request
+      const walletAddress = account;
+      const pageNumber = 1;
+      const itemsPerPage = 20;
+
+      // fetch the notifications
+      const { count, results } = await api.fetchNotifications(
+        walletAddress,
+        itemsPerPage,
+        pageNumber
+      );
+
+      // parse all the fetched notifications
+      const parsedResponse = utils.parseApiResponse(results);
+      setNotificationItems(parsedResponse);
+    }
+  }
+
+  async function sendNotifications(data) {
+    try {
+      const tx = await epnsSdk.sendNotification(
+        data.to,
+        "GigConomy",
+        data.message,
+        "",
+        "",
+        3, //this is the notificationType
+        "http://localhost:3000/", // a url for users to be redirected to
+        "https://media.istockphoto.com/vectors/abstract-blurred-colorful-background-vector-id1248542684?k=20&m=1248542684&s=612x612&w=0&h=1yKiRrtPhiqUJXS_yJDwMGVHVkYRk2pJX4PG3TT4ZYM=", // an image url, or an empty string
+        null //this can be left as null
+      );
+      setIsUpdated(!isUpdated);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+ ```
+
+https://github.com/GigConomy/GigConomy/blob/master/src/context/Notification.js
+
+**Worldcoin:** Using worldcoin to verify user.
+
+##  Worldcoin Implementation:
+
+```
+  async function getVerified() {
+    try {
+      const result = await worldID.enable();
+      console.log("World ID verified succesfully:", result); 
+    } catch (failure) {
+      console.warn("World ID verification failed:", failure);
+      // Re-activate here so your end user can try again
+    }
+  }
+```
+
+https://github.com/GigConomy/GigConomy/blob/master/src/LendingPage/LendingHeader.js
+
+**Transak:** Using Transak we can onboard more user by getting fiat currency and giving them crypto.
+
+##  Transak Implementation:
+
+```
+ let transak = new transakSDK({
+      apiKey: process.env.REACT_APP_TRANSAK_API_KEY, // Your API Key
+      environment: "STAGING", // STAGING/PRODUCTION
+      hostURL: window.location.origin,
+      widgetHeight: "480px",
+      widgetWidth: "500px",
+      // Examples of some of the customization parameters you can pass
+      defaultCryptoCurrency: "ETH", // Example 'ETH'
+      walletAddress: account, // Your customer's wallet address
+      themeColor: "#6b46c1", // App theme color
+      fiatCurrency: "USD", // If you want to limit fiat selection eg 'USD'
+      email: "", // Your customer's email address
+      redirectURL: "",
+    }); 
+    setTransak(transak);
+    transak.init();
+
+    // To get all the events
+    transak.on(transak.ALL_EVENTS, (data) => {
+      console.log(data);
+    });
+    transak.on(transak.EVENTS.TRANSAK_ORDER_SUCCESSFUL, (orderData) => {
+      console.log(orderData);
+      transak.close();
+    });
+    
+```
+
+https://github.com/GigConomy/GigConomy/blob/master/src/context/Transak.js
 
 **Challenges we have faced:** When we started building, we had so many ideas for features and functionalities to implement in Trustified.Netowork. We had too many ideas like we can build a freelancing platform, we can build a review system for businesses and so on. As a startup we knew that too many features or trying to cover too many use cases at once will confuse the users and implemented minimum possible features to solve one use case.
 
 ## Homepage:
 
-![trustified-landing](https://user-images.githubusercontent.com/45895007/161445304-fe733a7e-8bd1-40f1-9a8a-874927660aa2.png)
+<img width="1440" alt="Screenshot 2022-05-22 at 4 17 24 PM" src="https://user-images.githubusercontent.com/54347081/169691544-5d35e6ac-40a1-4574-acf6-f33992ece828.png">
+
+## Wallets:
+
+<img width="1412" alt="Screenshot 2022-05-22 at 4 23 30 PM" src="https://user-images.githubusercontent.com/54347081/169691725-83e23f90-6d01-499a-8cd0-4af44419e685.png">
 
 ## Escrow Agreement:
 
-![screencapture-localhost-3000-dashboard-agreement-2022-04-03-23_56_43](https://user-images.githubusercontent.com/45895007/161445413-1e5fa5a2-1699-4c52-bdc6-b971130681a4.png)
-
-## Hyphen Bridge:
-
-![screencapture-localhost-3000-dashboard-agreement-2022-04-03-23_54_46](https://user-images.githubusercontent.com/45895007/161445426-e4e8d6d1-1cc7-4c7e-a93b-afa6adc63dd1.png)
+<img width="1403" alt="img2" src="https://user-images.githubusercontent.com/54347081/169691573-f97ee886-1937-409f-bd86-62887f7e7bb5.png">
 
 ## Analytics:
 
-![screencapture-localhost-3000-dashboard-app-2022-04-03-23_53_58](https://user-images.githubusercontent.com/45895007/161445433-ff83efc9-ec1e-4753-801f-8d30f0951bfb.png)
+<img width="1420" alt="img1" src="https://user-images.githubusercontent.com/54347081/169691637-f01158ac-0ea3-45a3-8d74-e892f572058c.png">
 
-## Messages:
+## Ethereum Push Notification Service(EPNS):
 
-![screencapture-localhost-3000-dashboard-chat-OSjKR47wr2B6d0wD1okyIfbH-2022-04-03-23_53_25](https://user-images.githubusercontent.com/45895007/161445451-f30eac4d-34ca-44d8-9c9c-bfede1f2f310.png)
-
-## User Profile :
-
-![screencapture-localhost-3000-jaydippatel83-2022-04-03-23_53_08](https://user-images.githubusercontent.com/45895007/161445459-d830b153-46ea-4aae-86ef-4387f0c57af1.png)
+<img width="1429" alt="Screenshot 2022-05-22 at 4 28 20 PM" src="https://user-images.githubusercontent.com/54347081/169691869-d090b834-74e9-48c6-bc74-364ffc571332.png">
 
 ## Subscriptions
 
-![Screenshot 2022-04-03 at 11 50 13 PM](https://user-images.githubusercontent.com/45895007/161445482-4768a50a-5787-49e4-8ba7-d0826f738d61.png)
+<img width="1434" alt="Screenshot 2022-05-22 at 4 35 08 PM" src="https://user-images.githubusercontent.com/54347081/169692092-d49ae979-4533-4a4d-a074-a2a0b6101443.png">
 
 ## Subscription Details
 
-![Screenshot 2022-04-03 at 11 52 22 PM](https://user-images.githubusercontent.com/45895007/161445510-2b667e35-3f60-4fad-85f8-bed5913ff577.png)
+<img width="1369" alt="Screenshot 2022-05-22 at 4 36 06 PM" src="https://user-images.githubusercontent.com/54347081/169692128-e1020333-26d2-4267-abe9-7c00217c724a.png">
 
-![Screenshot 2022-04-04 at 1 13 58 AM](https://user-images.githubusercontent.com/45895007/161445333-17ca5a8d-354e-4928-b8e6-11635d23731c.png)
+## Invoice Details
+
+<img width="1415" alt="Screenshot 2022-05-22 at 4 29 48 PM" src="https://user-images.githubusercontent.com/54347081/169691914-490cacc6-c1b2-4d8f-9b22-8a26d374348e.png">
+
 
 **WAGMI 😊🚀∞**
