@@ -21,15 +21,32 @@ get rewarded for best Trust Score.**
 **⭓ Polygon:** We have used Polygon Mumbai Testnet for deploying smart contracts of
 **1) Escrow Agreement**
 
+``` module.exports = {
+  defaultNetwork: "matic",
+  networks: {
+    hardhat: {},
+    mumbai: {
+      url: `https://polygon-mumbai.g.alchemy.com/v2/${process.env.REACT_APP_ALCHEMY_KEY}`,
+      accounts: [process.env.REACT_APP_PRIVATE_KEY],
+    },
+  },
 
+  solidity: {
+    version: "0.8.0",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
+    },
+  },
+}; ```
+
+https://github.com/GigConomy/GigConomy/blob/master/hardhat.config.js
 
 **⚫ Spheron:** We have used Spheron Decentralized cloud to host our Dapp using Pinta storage integration of Spheron.
 
-[dapp url]: (https://trustified-dapp-nxnss6.argoapp.io/).
-
-## Polygon Implementation:
-
-`code here `
+[dapp url]: ().
 
 **💾 IPFS/Filecoin NFT.Storage:** We are Using Web3.Storage, to permanently store all the details of user invoices and subscription service on decentralized storage.
 
