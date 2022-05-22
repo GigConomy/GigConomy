@@ -43,11 +43,6 @@ export default function AppTotalAgreement() {
   const [agree, setAgree] = useState();
   const { data, error, isLoading } = useMoralisCloudFunction("getAgreements");
   useEffect(async () => {
-    const data = await Moralis.Plugins.covalent?.getLogEventsByContractAddress({
-      chainId: 80001,
-      contractAddress: AgreementAddress,
-    });
-
     const aData = JSON.parse(JSON.stringify(data));
 
     const filterUsr =
@@ -61,7 +56,12 @@ export default function AppTotalAgreement() {
     if (filterUsr != null) setAgree(filterUsr.length);
   });
 
-  useEffect(() => {});
+  useEffect(async () => {
+    const data = await Moralis.Plugins.covalent?.getLogEventsByContractAddress({
+      chainId: 80001,
+      contractAddress: AgreementAddress,
+    });
+  }, []);
 
   return (
     <RootStyle>

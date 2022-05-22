@@ -11,10 +11,9 @@
 **2) Create Escrow agreements with personalize terms as per customers.**
 
 **3) Send/Receive crypto payments in a reliable and secure way without
-paying hefty commissions to third parties.**
+paying hefty commissions to third parties. **
 
-**4) Trust Score: Rate your experience of working with each other and
-get rewarded for best Trust Score.**
+
 
 ## List of Bounties implemented:
 
