@@ -1,11 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-import './EIP712MetaTransaction.sol';
+import "@openzeppelin/contracts/utils/math/SafeMath.sol"; 
 
-
-abstract contract Agreement  is EIP712MetaTransaction{
+contract Agreement {
     using SafeMath for uint256;
 
     address payable private _buyer;
@@ -77,7 +75,7 @@ abstract contract Agreement  is EIP712MetaTransaction{
 
     modifier onlyAgreementParties() {
         require(
-            msgSender() == _buyer || msgSender() == _seller,
+            msg.sender == _buyer || msg.sender == _seller,
             "Only allow agreement parties!"
         );
 
@@ -85,7 +83,7 @@ abstract contract Agreement  is EIP712MetaTransaction{
     }
 
     modifier onlyAgreementBuyer() {
-        require(msgSender() == _buyer, "Only allow agreement buyer");
+        require(msg.sender == _buyer, "Only allow agreement buyer");
         _;
     }
 
@@ -112,12 +110,12 @@ abstract contract Agreement  is EIP712MetaTransaction{
         onlyAgreementActive
         agreementLocked(false)
     {
-        require(!_stakeStatus[msgSender()], "Already stake the amount.");
+        require(!_stakeStatus[msg.sender], "Already stake the amount.");
         require(
-            msg.value == _stakeAmount[msgSender()],
+            msg.value == _stakeAmount[msg.sender],
             "Incorrect staking amount sent."
         );
-        _stakeStatus[msgSender()] = true;
+        _stakeStatus[msg.sender] = true;
         emit AgreementStateChanged(_buyer, _seller, getStatus());
     }
 
@@ -129,16 +127,16 @@ abstract contract Agreement  is EIP712MetaTransaction{
         agreementLocked(false)
     {
         uint256 balance = address(this).balance;
-        require(_stakeStatus[msgSender()], "No staked yet!.");
+        require(_stakeStatus[msg.sender], "No staked yet!.");
         require(
-            balance >= _stakeAmount[msgSender()],
+            balance >= _stakeAmount[msg.sender],
             "Not enough Matic left to withdraw."
         );
-        (bool success, ) = (msgSender()).call{value: _stakeAmount[msgSender()]}(
+        (bool success, ) = (msg.sender).call{value: _stakeAmount[msg.sender]}(
             ""
         );
         require(success, "Transfer failed.");
-        _stakeStatus[msgSender()] = false;
+        _stakeStatus[msg.sender] = false;
         emit AgreementStateChanged(_buyer, _seller, getStatus());
     }
 
@@ -150,12 +148,12 @@ abstract contract Agreement  is EIP712MetaTransaction{
         agreementLocked(true)
     {
         require(
-            !_cancelStatus[msgSender()],
+            !_cancelStatus[msg.sender],
             " Already issued a cancellation request."
         );
-        _cancelStatus[msgSender()] = true;
+        _cancelStatus[msg.sender] = true;
         if (_cancelStatus[_buyer] && _cancelStatus[_seller]) {
-            require(address(this).balance >= _salePrice, "Not enough Matic.");
+            require(address(this).balance >= _salePrice - _stakeAmount[msg.sender], "Not enough  NEON.");
 
             (bool buyerRefunded, ) = (_buyer).call{value: _stakeAmount[_buyer]}(
                 ""
@@ -185,10 +183,10 @@ abstract contract Agreement  is EIP712MetaTransaction{
         agreementLocked(true)
     {
         require(
-            _cancelStatus[msgSender()],
+            _cancelStatus[msg.sender],
             "Doesn't have a cancel request to revoke"
         );
-        _cancelStatus[msgSender()] = false;
+        _cancelStatus[msg.sender] = false;
         emit AgreementStateChanged(_buyer, _seller, getStatus());
     }
 

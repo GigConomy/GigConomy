@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "./Agreement.sol";
 
-contract AgreementContract  {
+contract AgreementContract {
     using SafeMath for uint256;
     using Counters for Counters.Counter;
 

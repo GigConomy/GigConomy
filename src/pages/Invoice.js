@@ -108,6 +108,7 @@ function Invoices() {
     const d =
       data &&
       invoicedata.filter((inv) => inv.name == user?.attributes.username);
+    console.log(data);
     data && setInvoices(d);
     setLoading(false);
   }
@@ -169,6 +170,7 @@ function Invoices() {
                       </TableCell>
                     </TableRow>
                   )}
+                  {console.log(invoices, "invoices")}
                   {invoices &&
                     invoices.map((invoice) => (
                       <TableRow>

@@ -46,7 +46,6 @@ export default function InvoiceDetail() {
       data && invoices.filter((inv) => inv.objectId == params?.id);
     invoice && setInvoice(invoice[0]);
   }
- 
 
   async function storeFiles() {
     const input = docToPrint.current;
@@ -67,20 +66,20 @@ export default function InvoiceDetail() {
     });
   }
 
-  const handlePayNow=async(invc)=>{  
-    const amt= invc && invc.price * invc.quantity + gst;
-   
-    const address = invc?.address; 
-      await Moralis.enableWeb3();
-      const options = {
-          type: "native",
-          amount: Moralis.Units.ETH(amt, "18"),
-          receiver: address,
-          contractAddress: "0x0000000000000000000000000000000000001010",
-      }
-      let result = await Moralis.transfer(options); 
-      toast.success("Payment success!"); 
-  }
+  const handlePayNow = async (invc) => {
+    const amt = invc && invc.price * invc.quantity + gst;
+
+    const address = invc?.address;
+    await Moralis.enableWeb3();
+    const options = {
+      type: "native",
+      amount: Moralis.Units.ETH(amt, "18"),
+      receiver: address,
+      contractAddress: "0x0000000000000000000000000000000000001010",
+    };
+    let result = await Moralis.transfer(options);
+    toast.success("Payment success!");
+  };
 
   useEffect(() => {
     invoice &&
@@ -89,7 +88,8 @@ export default function InvoiceDetail() {
 
   return (
     <div className="mt-5 mb-5">
-      <div className="mt-5"
+      <div
+        className="mt-5"
         ref={docToPrint}
         style={{
           borderRadius: "5px",
@@ -203,18 +203,18 @@ export default function InvoiceDetail() {
                   <div className="col-md-6">Client Signature :</div>
                 </div>
                 <div className="paynowLink">
-                <Button
-                    style={{ 
+                  <Button
+                    style={{
                       color: "blue",
                       fontSize: "0.875rem",
-                      float: "right", 
+                      float: "right",
                       padding: "5px 15px",
                       border: "blue 1px solid",
                     }}
-                    onClick={()=>handlePayNow(invoice)} 
+                    onClick={() => handlePayNow(invoice)}
                   >
                     Pay Now
-                  </Button> 
+                  </Button>
                 </div>
 
                 <div className="downloadbtn" style={{ marginTop: "25px" }}>
@@ -224,7 +224,7 @@ export default function InvoiceDetail() {
                 </div>
 
                 <div className="mb-5">
-                  <div style={{ textAlign: "center",}}>
+                  <div style={{ textAlign: "center" }}>
                     <h5>Powered By</h5>
                   </div>
                   <div
@@ -235,7 +235,7 @@ export default function InvoiceDetail() {
                       marginBottom: "30px",
                     }}
                   >
-                    <img src={pic} />
+                    <img src={"/images/logoGig.png"} />
                   </div>
                 </div>
               </div>

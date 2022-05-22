@@ -18,10 +18,11 @@ get rewarded for best Trust Score.**
 
 ## List of Bounties implemented:
 
-**⭓ Polygon with Spheron:** We have used Polygon Mumbai Testnet for deploying smart contracts of
+**⭓ Polygon:** We have used Polygon Mumbai Testnet for deploying smart contracts of
 **1) Escrow Agreement**
-**2) Chainklink VRF**
-**3) Chainlink Price Feed.**
+
+
+
 **⚫ Spheron:** We have used Spheron Decentralized cloud to host our Dapp using Pinta storage integration of Spheron.
 
 [dapp url]: (https://trustified-dapp-nxnss6.argoapp.io/).
@@ -29,12 +30,6 @@ get rewarded for best Trust Score.**
 ## Polygon Implementation:
 
 `code here `
-
-**⛓️ Chainlink: We have used Chainlink 1) Price Feed 2) Chainlink VRF**
-
-**Chainlink Price feed** is used to convert the price of tokens such as Matic to USD, Ether to USD while the user creates invoices for their customers.
-
-**Chainlink VRF** is used to generate a random number for the series of invoices the user creates.
 
 **💾 IPFS/Filecoin NFT.Storage:** We are Using Web3.Storage, to permanently store all the details of user invoices and subscription service on decentralized storage.
 
