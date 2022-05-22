@@ -74,36 +74,6 @@ export default function LendingHeader() {
   }
 
   return (
-    // <div>
-    //   <header className="navbar">
-    //     <div className="navbar__title navbar__item">
-    //       <Logo />
-    //     </div>
-
-    //     <div className="navbar__item">
-    //       <Button onClick={cryptoPayment} variant="outlined" style={{margin:'0 5px'}}>Crypto Payment</Button>
-    //       <Button onClick={agreement} variant="outlined"  style={{margin:'0 5px'}}>Escrow Agreement</Button>
-    //       {user == null ? (
-    //         <Button
-    //           variant="contained"
-    //           onClick={async () => {
-    //             await authenticate();
-    //             navigate("/dashboard/app");
-    //           }}
-    //         >
-    //           Connect
-    //         </Button>
-    //       ) : (
-    //         <Button variant="outlined">
-    //           {user &&
-    //             user.attributes.username &&
-    //             user.attributes.username.slice(0, 10)}
-    //         </Button>
-    //       )}
-    //     </div>
-    //   </header>
-    // </div>
-    //
     <AppBar position="static" color="transparent">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
