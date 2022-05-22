@@ -21,7 +21,7 @@ import ProductRoot from "./ProductRoot";
 import InvoicingRoot from "./InvoicingRoot";
 import AnalyticsRoot from "./AnalyticsRoot";
 
-import Slider from './Slider'
+import Slider from "./Slider";
 
 // import SliderExample from './slider'
 
@@ -54,7 +54,7 @@ export default function Lending() {
       <div className="container-fluid p-5">
         <div className="row">
           <div className="col-8 mx-auto mt-5">
-            <p className="peragraph">Decentralized  Freelancing Platform</p>
+            <p className="peragraph">Decentralized Freelancing Platform</p>
             {/*    . */}
             <p className="peragraph">
               {" "}
@@ -73,7 +73,6 @@ export default function Lending() {
         </div>
       </div>
 
-
       {/* ---------------------Sliders-------------------------------------------- */}
 
       <Slider />
@@ -83,16 +82,32 @@ export default function Lending() {
       </div> */}
       {/* ========================================================================= */}
 
-
       <div className="container mt-5 mb-5">
         <div className="row">
           <div className="col-12 mt-5">
-            <p className="network pt-4">
-              How it works?
-            </p>
-            <div width="100%"
-              height="500px"><iframe
-                style={{ width: '100%', height: "500px" }} src="https://www.loom.com/share/dba9c5dace8d4dd5ae68e1e99f9b28c4" ></iframe></div>
+            <p className="network pt-4">How it works?</p>
+            <div
+              style={{
+                position: "relative",
+                paddingBottom: " 53.73134328358209%",
+                height: 0,
+              }}
+            >
+              <iframe
+                src="https://www.loom.com/embed/dba9c5dace8d4dd5ae68e1e99f9b28c4"
+                frameborder="0"
+                webkitallowfullscreen
+                mozallowfullscreen
+                allowfullscreen
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                }}
+              ></iframe>
+            </div>
           </div>
         </div>
       </div>
@@ -115,11 +130,7 @@ export default function Lending() {
             <div className="col-12 col-lg-4 col-md-4">
               <RootStyle style={{ height: "100%" }}>
                 <IconWrapperStyle>
-                  <Iconify
-                    icon="gala:secure"
-                    width={24}
-                    height={24}
-                  />
+                  <Iconify icon="gala:secure" width={24} height={24} />
                 </IconWrapperStyle>
                 <Typography variant="h3" color="#000">
                   Fast & Secure
@@ -182,7 +193,7 @@ export default function Lending() {
           </div>
         </div>
       </div>
-      <div className="container  mt-5 mb-5 "  >
+      <div className="container  mt-5 mb-5 ">
         <div className="row">
           <div className="col-12  ">
             <p className="network pt-4">Key Features</p>
@@ -263,10 +274,10 @@ export default function Lending() {
                   color="#000"
                   sx={{ opacity: 0.72 }}
                 >
-                  Sell products/services globally. Create agreement with scope of
-                  work, delivery time frame and pricing.
-                  Let smart contract ensure trust and ethical behaviour of
-                  parties involved in transaction.
+                  Sell products/services globally. Create agreement with scope
+                  of work, delivery time frame and pricing. Let smart contract
+                  ensure trust and ethical behaviour of parties involved in
+                  transaction.
                 </Typography>
               </RootStyle>
             </div>
@@ -295,7 +306,7 @@ export default function Lending() {
           </div>
         </div>
       </div>
-    </Fragment >
+    </Fragment>
 
     //           <div className="col-md-4 mt-4">
     //             <div className="cardtrust">
