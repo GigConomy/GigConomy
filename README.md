@@ -22,7 +22,7 @@ get rewarded for best Trust Score.**
 **1) Escrow Agreement**
 
 ## Polygon Implementation:
- 
+
 ```
 module.exports = {`
   networks: {
@@ -82,7 +82,7 @@ https://github.com/GigConomy/GigConomy/blob/master/hardhat.config.js
     const files = [new File([blob], "subscribtion_Details.json")];
     return files;
   }
-  ```
+```
 
 https://github.com/GigConomy/GigConomy/blob/master/src/modal/CreateSubscribtionModal.js
 https://github.com/GigConomy/GigConomy/blob/master/src/modal/CreateInvoiceModal.js
@@ -98,9 +98,9 @@ walletconnect: {
       infuraId: process.env.REACT_APP_INFURA_KEY, // required
     },
   },
- ```
- 
- https://github.com/GigConomy/GigConomy/blob/master/src/providerOptions.js
+```
+
+https://github.com/GigConomy/GigConomy/blob/master/src/providerOptions.js
 
 **Unstoppable Login:** Using Unstoppable domains user can login with their unstoppable domains.
 
@@ -120,15 +120,14 @@ export const uauthOptions = {
     package: UAuthSPA,
     options: uauthOptions,
   },
-  
+
 ```
 
 https://github.com/GigConomy/GigConomy/blob/master/src/providerOptions.js
 
-
 **Coinbase Wallet:** Coinbase Wallet allow us to connect and send, receive crypto payment.
 
-##  Coinbase Wallet Implementation:
+## Coinbase Wallet Implementation:
 
 ```
  walletlink: {
@@ -138,7 +137,7 @@ https://github.com/GigConomy/GigConomy/blob/master/src/providerOptions.js
       infuraId: process.env.REACT_APP_INFURA_KEY, // Required unless you provide a JSON RPC url; see `rpc` below
     },
   },
-  
+
 ```
 
 https://github.com/GigConomy/GigConomy/blob/master/src/providerOptions.js
@@ -186,20 +185,20 @@ https://github.com/GigConomy/GigConomy/blob/master/src/providerOptions.js
       console.log(error);
     }
   }
-  
- ```
+
+```
 
 https://github.com/GigConomy/GigConomy/blob/master/src/context/Notification.js
 
 **Worldcoin:** Using worldcoin to verify user.
 
-##  Worldcoin Implementation:
+## Worldcoin Implementation:
 
 ```
   async function getVerified() {
     try {
       const result = await worldID.enable();
-      console.log("World ID verified succesfully:", result); 
+      console.log("World ID verified succesfully:", result);
     } catch (failure) {
       console.warn("World ID verification failed:", failure);
       // Re-activate here so your end user can try again
@@ -211,7 +210,7 @@ https://github.com/GigConomy/GigConomy/blob/master/src/LendingPage/LendingHeader
 
 **Transak:** Using Transak we can onboard more user by getting fiat currency and giving them crypto.
 
-##  Transak Implementation:
+## Transak Implementation:
 
 ```
  let transak = new transakSDK({
@@ -227,7 +226,7 @@ https://github.com/GigConomy/GigConomy/blob/master/src/LendingPage/LendingHeader
       fiatCurrency: "USD", // If you want to limit fiat selection eg 'USD'
       email: "", // Your customer's email address
       redirectURL: "",
-    }); 
+    });
     setTransak(transak);
     transak.init();
 
@@ -239,12 +238,12 @@ https://github.com/GigConomy/GigConomy/blob/master/src/LendingPage/LendingHeader
       console.log(orderData);
       transak.close();
     });
-    
+
 ```
 
 https://github.com/GigConomy/GigConomy/blob/master/src/context/Transak.js
 
-**Challenges we have faced:** When we started building, we had so many ideas for features and functionalities to implement in Trustified.Netowork. We had too many ideas like we can build a freelancing platform, we can build a review system for businesses and so on. As a startup we knew that too many features or trying to cover too many use cases at once will confuse the users and implemented minimum possible features to solve one use case.
+**Challenges we have faced:** When we started building, we had so many ideas for features and functionalities to implement in GigConomy. We had too many ideas like we can build a freelancing platform, we can build a review system for businesses and so on. As a startup we knew that too many features or trying to cover too many use cases at once will confuse the users and implemented minimum possible features to solve one use case.
 
 ## Homepage:
 
@@ -277,6 +276,5 @@ https://github.com/GigConomy/GigConomy/blob/master/src/context/Transak.js
 ## Invoice Details
 
 <img width="1415" alt="Screenshot 2022-05-22 at 4 29 48 PM" src="https://user-images.githubusercontent.com/54347081/169691914-490cacc6-c1b2-4d8f-9b22-8a26d374348e.png">
-
 
 **WAGMI 😊🚀∞**
