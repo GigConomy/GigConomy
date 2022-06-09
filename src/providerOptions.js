@@ -7,13 +7,12 @@ require("dotenv").config({ path: "./.env" });
 
 // These options are used to construct the UAuthSPA instance.
 export const uauthOptions = {
-  clientID: "79a8a15a-dddc-4d39-8483-9db5536cc839",
-  redirectUri: "http://localhost:3000",
+  clientID: "6356011c-bc7b-4ee4-b7be-23f113752702",
+  redirectUri: "https://gigconomy.vercel.app",
 
   // Must include both the openid and wallet scopes.
   scope: "openid wallet",
 };
-
 
 export const providerOptions = {
   walletlink: {

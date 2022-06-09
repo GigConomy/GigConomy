@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([[18],{23:function(n,o,c){"use strict";c.d(o,"a",(function(){return t}));const s=()=>n=>n;const t={API:s(),RPC:s(),Page:s()}}}]);
